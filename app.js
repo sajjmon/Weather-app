@@ -5,6 +5,8 @@ window.addEventListener('load', () => {
 
     let temperatureDegree = document.querySelector('.temperature-degree');
     let locationTimezone = document.querySelector('.location-timezone');
+    let temperatureSection = document.querySelector(".temperature");
+    const temperatureSpan = document.querySelector(".temperature span")
 
 
     if (navigator.geolocation) {
@@ -27,8 +29,25 @@ window.addEventListener('load', () => {
                     temperatureDegree.textContent = temperature;
                     temperatureDescription.textContent = summary;
                     locationTimezone.textContent = data.timezone;
+                    // Formula for celsius
+                    let celsius = (temperature - 32) * (5 / 9);
+
+
                     // Set icon
                     setIcons(icon, document.querySelector(".icon"));
+
+                    // change temperatur to celcius
+                    temperatureSection.addEventListener('click', () => {
+                        if (temperatureSpan.textContent === "F") {
+                            temperatureSpan.textContent = "C";
+                            temperatureDegree.textContent = Math.floor(celsius);
+                        } else {
+                            temperatureSpan.textContent = "F";
+                            temperatureDegree.textContent = temperature;
+                        }
+
+                    });
+
 
                 });
 
